@@ -1,5 +1,7 @@
 # LETI TeleBot schedule
- Бот для выдачи расписания в ЛЭТИ
+ [@Leti_Help_Bot](https://t.me/Leti_Help_Bot)<br>
+ Бот для выдачи расписания в ЛЭТИ<br>
+ ![main](https://github.com/Johnson070/LETI-TeleBot-schedule/raw/main/main.png)
 
 ## Настройка
  1) Создаёте бота в BotFather, потом узнаёте токен и прописываете его в ```settings.py``` => ```bot_token = ''```
