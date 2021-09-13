@@ -11,8 +11,8 @@ import datetime
 
 class user_data:
     def __init__(self,id_sys,group_id,level,facultu,EDType):
-        self.id_sys = id_sys
-        self.group_id = group_id
+        self.id_sys = id_sys.zfill(4)
+        self.group_id = group_id.zfill(4)
         self.level = level
         self.facultu = facultu
         self.EDType = EDType
@@ -21,7 +21,7 @@ class user:
     def __init__(self, user_id,name,date_connect,week=None,group=None,lang = 'RU'):
         self.user_id = user_id
         self.week = week
-        self.group = group
+        self.group = group.zfill(4)
         self.date_connect = date_connect
         self.lang = lang
         self.name = name
@@ -114,7 +114,7 @@ def get_links():
 def check_group(group):
     conn = sqlite3.connect(settings.sqlite_file)
     cursor = conn.cursor()
-    row = cursor.execute(f'SELECT * FROM [groups] WHERE group_id = "{group}"').fetchall()
+    row = cursor.execute(f'SELECT * FROM [groups] WHERE group_id = "{group.zfill(4)}"').fetchall()
     cursor.close()
     conn.close()
     if row == []:
@@ -143,7 +143,7 @@ def get_schedule(group_id,weekday,week_type):
 def get_group_data(group_id):
     conn = sqlite3.connect(settings.sqlite_file)
     cursor = conn.cursor()
-    row = cursor.execute(f'SELECT * FROM [groups] WHERE group_id = "{group_id}"').fetchall()
+    row = cursor.execute(f'SELECT * FROM [groups] WHERE group_id = "{group_id.zfill(4)}"').fetchall()
     cursor.close()
     conn.close()
 
@@ -177,7 +177,7 @@ def update_user(user_id,group=None,week=None):
 
     if row != None:
         if group != None:
-            cursor.execute(f'UPDATE users SET [group] = {group} WHERE user_id = "{user_id}"')
+            cursor.execute(f'UPDATE users SET [group] = {group.zfill(4)} WHERE user_id = "{user_id}"')
             conn.commit()
         if week != None:
             cursor.execute(f'UPDATE users SET week = {week} WHERE user_id = "{user_id}"')
