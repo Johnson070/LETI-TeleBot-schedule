@@ -1,4 +1,5 @@
 # LETI TeleBot schedule
+ [@Leti_Help_Bot](https://t.me/Leti_Help_Bot)<br>
  Бот для выдачи расписания в ЛЭТИ<br>
  ![main](https://github.com/Johnson070/LETI-TeleBot-schedule/raw/main/main.png)
 
