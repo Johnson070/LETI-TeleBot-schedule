@@ -406,6 +406,7 @@ def start_bot():
                 bot.clear_step_handler_by_chat_id(chat_id=call.message.chat.id)
 
             if call.data == 'admin_info':
+                bot.clear_step_handler_by_chat_id(chat_id=call.message.chat.id)
                 bot.edit_message_text(
                     chat_id=chat_id,
                     message_id=message_id,
@@ -421,9 +422,18 @@ def start_bot():
                         text='Вы перешли в меню админа', 
                         reply_markup=menu.admin_menu)
 
+            if call.data == 'send_by_bot':
+                if chat_id == settings.admin_id_1 or chat_id == settings.admin_id_2:
+                    msg = bot.edit_message_text(
+                        chat_id=chat_id, 
+                        message_id=message_id,
+                        text='Отправьте id чата и через # сообщение', 
+                        reply_markup=menu.back_to_admin_menu)
+                    bot.register_next_step_handler(msg, chat_send_bot)
+
             if call.data == 'send_bd':
                 if chat_id == settings.admin_id_1 or chat_id == settings.admin_id_2:
-                    bot.send_document(chat_id, open(r'base_ts.sqlite', 'rb'))
+                    bot.send_document(chat_id, open(settings.sqlite_file, 'rb'))
                 
 
             if call.data == 'add_schedule':
@@ -623,6 +633,14 @@ def start_bot():
                     text='Вы перешли в меню админа\n\nРасписание обновлено!', 
                     reply_markup=menu.admin_menu)
                 update_mode = False
+
+    def chat_send_bot(message):
+        chat_id = message.text.split('#')
+        try:
+            bot.send_message(chat_id[0],chat_id[1])
+        except:
+            print("error!")
+        main_menu_send(message.chat.id)
 
     def request_wait(message):
         request_msg = message.text

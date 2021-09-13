@@ -73,6 +73,7 @@ admin_menu.add(types.InlineKeyboardButton(text='Обновить расписа�
 admin_menu.add(types.InlineKeyboardButton(text='Рассылка', callback_data='mail_to'))
 admin_menu.add(types.InlineKeyboardButton(text='Заявки', callback_data='requests_view'))
 admin_menu.add(types.InlineKeyboardButton(text='Скачать BD', callback_data='send_bd'))
+admin_menu.add(types.InlineKeyboardButton(text='Отправить сообщение от бота', callback_data='send_by_bot'))
 admin_menu.add(
     types.InlineKeyboardButton(text='Информация', callback_data='admin_info'),
     types.InlineKeyboardButton(text='Выйти', callback_data='exit_to_menu')
@@ -94,6 +95,25 @@ requestBtn.add(
 nazad = types.InlineKeyboardMarkup(row_width=1)
 nazad.add(
     types.InlineKeyboardButton(text='Назад', callback_data='exit_to_menu')
+)
+
+# Admin control
+admin_menu_control_catalog = types.InlineKeyboardMarkup(row_width=1)
+admin_menu_control_catalog.add(
+    types.InlineKeyboardButton(text='Добавить город', callback_data='add_section_to_catalog'),
+    types.InlineKeyboardButton(text='Удалить город', callback_data='del_section_to_catalog'),
+    types.InlineKeyboardButton(text='Назад', callback_data='back_to_admin_menu')
+)
+
+
+
+# Admin control section
+admin_menu_control_section = types.InlineKeyboardMarkup(row_width=1)
+admin_menu_control_section.add(
+    types.InlineKeyboardButton(text='Добавить товар в город', callback_data='add_product_to_section'),
+    types.InlineKeyboardButton(text='Удалить товар из города', callback_data='del_product_to_section'),
+    types.InlineKeyboardButton(text='Загрузить товар', callback_data='download_product'),
+    types.InlineKeyboardButton(text='Назад', callback_data='back_to_admin_menu')
 )
 
 # Back to admin menu
