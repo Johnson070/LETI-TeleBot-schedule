@@ -438,8 +438,10 @@ def start_bot():
 
             if call.data == 'add_schedule':
                 shutil.copyfile(settings.sqlite_file, settings.sqlite_file_update)
-                r = requests.get('https://digital.etu.ru/api/common/groups?forLastPublicatedSchedule=true&withFaculty=true&withSemesterSeasons=true&withFlows=true')
-
+                r = requests.get('https://digital.etu.ru/api/general/dicts/groups?scheduleId=publicated&withFaculty=true&withSemesterSeasons=true&withFlows=true') 
+                #https://digital.etu.ru/api/general/dicts/groups?scheduleId=publicated&withFaculty=true&withSemesterSeasons=true&withFlows=true
+                #https://digital.etu.ru/api/common/groups?forLastPublicatedSchedule=true&withFaculty=true&withSemesterSeasons=true&withFlows=true
+                #Сайт лэти поменял обращение к api сервису
                 groups_id = []
                 groups = []
                 if r.status_code == 200:
@@ -497,7 +499,9 @@ def start_bot():
                                 text=f"Ожидайте пока бот скачает базу расписания!\n\n({count+1} из {len(groups)})")
                         count+=1
 
-                        r = requests.get(f'https://digital.etu.ru/api/schedules/publicated?groups={group_id}&withSubjectCode=true&withURL=true')
+                        r = requests.get(f'https://digital.etu.ru/api/schedule/objects/publicated?groups={group_id}&withSubjectCode=true&withURL=true')
+                        #https://digital.etu.ru/api/schedule/objects/publicated?groups=1497&withSubjectCode=true&withURL=true
+                        #https://digital.etu.ru/api/schedules/publicated?groups={group_id}&withSubjectCode=true&withURL=true
 
                         if r.status_code == 200:
                             text = r.text.replace("'",'')
